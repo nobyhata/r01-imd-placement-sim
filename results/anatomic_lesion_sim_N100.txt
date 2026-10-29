@@ -1,0 +1,12 @@
+lesions 220; axial equivalent diameter median 13.5 mm (IQR 10.1-17.0), <=10 mm: 24%
+lesion pixel spacing: [(np.float32(0.234375), np.float32(0.234375)), (np.float32(0.28125), np.float32(0.28125)), (np.float32(0.3), np.float32(0.3)), (np.float32(0.3422619), np.float32(0.3422619)), (np.float32(0.3424577), np.float32(0.3424577)), (np.float32(0.46875), np.float32(0.46875)), (np.float32(0.5), np.float32(0.5)), (np.float32(0.5625), np.float32(0.5625)), (np.float32(0.5729167), np.float32(0.5729167)), (np.float32(0.625), np.float32(0.625)), (np.float32(0.78125), np.float32(0.78125))]
+ideal 4-slot covering ratio median 0.69 (IQR 0.66-0.71)
+mag noise | inside% static adapt | (<=10mm) static adapt | pattern err static adapt | cov<=0.9 % static adapt | adapt better(pattern)%
+ 2.5  0.4 |  89.5  97.1 |  71.7  91.9 |  2.1  1.5 |  54.8  78.5 |   98
+ 2.5  1.5 |  79.3  83.5 |  60.3  67.4 |  2.9  2.6 |  30.0  35.3 |   73
+ 3.5  0.4 |  78.4  94.0 |  54.1  85.9 |  2.8  1.8 |  31.6  60.5 |   99
+ 3.5  1.5 |  72.3  81.4 |  51.0  64.7 |  3.4  2.8 |  19.9  28.5 |   87
+ 6.0  0.4 |  53.5  83.6 |  29.2  69.5 |  4.6  2.9 |   7.0  24.8 |  100
+ 6.0  1.5 |  53.2  73.0 |  29.4  52.8 |  5.0  3.6 |   6.0  13.1 |   99
+ 9.0  0.4 |  35.0  69.5 |  11.5  43.4 |  6.7  4.4 |   1.4   6.8 |  100
+ 9.0  1.5 |  35.5  60.9 |  12.7  34.1 |  7.0  4.9 |   1.4   4.1 |  100
