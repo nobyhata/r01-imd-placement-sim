@@ -13,6 +13,8 @@ the same simulated deflection field and noise for each simulated patient.
 |---|---|
 | `mc_adaptive_microdevice.py` | P2 simulation: four devices in a circular 2D lesion (10 or 14 mm), deflection offset up to 3.5, 6, or 9 mm with a weak spatial gradient, per-insertion noise 0.4 or 1.5 mm, 300 simulated patients per condition. Reports pattern error and share of devices inside the lesion. |
 | `covering_ratio.py` | Covering ratio (largest lesion-to-nearest-device distance / equal-area radius) for the P2 simulation; sets the 0.9 spread target. |
+| `lesion_sim_3d.py` | 3D version on the same 220 PI-CAI lesions. Each IMD is a 6.5 mm x 0.75 mm device along the needle path (cranio-caudal), with 20 reservoirs at 7 levels; depth error is added; lesions of <=10, 10-15, and >15 mm (largest dimension) receive 2, 3, or 4 devices, following Rainer et al. (J Magn Reson Imaging 2025). Reports the reservoir-in-target (RIT) fraction by lesion size, static vs adaptive, and the ceiling under error-free placement. |
+| `figures/p2_sim_3d_figure.py` | Figure 8 E-F of the application: example 12 mm lesion and RIT by lesion size at a 6 mm offset. |
 | `anatomic_lesion_sim.py` | Same planner on real lesion anatomy: the largest axial cross-section of 220 expert-delineated csPCa lesions from the public PI-CAI dataset, i.e., the plane perpendicular to a transperineal needle. Target slots are the centroids of a 4-region centroidal Voronoi (k-means) partition of each lesion. |
 | `fetch_picai_lesions.sh` | Downloads the PI-CAI expert lesion masks (CC BY-NC 4.0) into `data/` (not tracked). |
 | `power_calculations.py`, `swine_baseline.py` | Sample-size and baseline calculations used in the Approach. |
@@ -35,18 +37,38 @@ Ideal four-slot covering ratio median 0.69.
 
 Adaptive planning gave lower pattern error than the static plan in 73–100% of simulated patients.
 
+## 3D results (`results/lesion_sim_3d_N30.txt`, 30 simulated patients per lesion and arm)
+
+Largest lesion dimension 6.0-60.0 mm (median 18.7); cranio-caudal extent 3.0-60.0 mm.
+Reservoirs in the lesion (RIT, %), static -> adaptive, at a 6 mm offset and 0.4 mm noise:
+
+| Largest dimension (mm) | Lesions | Static -> adaptive | Error-free ceiling |
+|---|---|---|---|
+| <=10 | 17 | 9.7 -> 37.2 | 72.7 |
+| 10-15 | 43 | 31.3 -> 63.7 | 87.3 |
+| 15-20 | 64 | 46.1 -> 74.5 | 93.6 |
+| 20-27 | 55 | 57.6 -> 81.3 | 97.1 |
+| >27 | 41 | 81.7 -> 90.7 | 98.3 |
+| all | 220 | 49.9 -> 74.2 | |
+
+In lesions of 10 mm or less, the median cranio-caudal extent (6 mm) barely exceeds the 6.5 mm device,
+which caps RIT even under error-free placement; the planner gains most in lesions of 10-27 mm.
+Results for offsets of 2.5 and 9 mm and noise of 1.5 mm are in the results file.
+
 ## Run
 
 ```
-pip install numpy scipy scikit-learn nibabel
+pip install numpy scipy scikit-learn nibabel scikit-image matplotlib
 python mc_adaptive_microdevice.py
 ./fetch_picai_lesions.sh
 python anatomic_lesion_sim.py data/picai_labels/csPCa_lesion_delineations/human_expert/resampled 100
+python lesion_sim_3d.py data/picai_labels/csPCa_lesion_delineations/human_expert/resampled 30
+python figures/p2_sim_3d_figure.py data/picai_labels/csPCa_lesion_delineations/human_expert/resampled
 ```
 
 ## Limitations
 
-These are 2D didactic models of the needle-perpendicular plane. Deflection is a synthetic
+`mc_adaptive_microdevice.py` and `anatomic_lesion_sim.py` are 2D didactic models of the needle-perpendicular plane; `lesion_sim_3d.py` adds device length and depth error but treats each reservoir as a point and uses the MRI slice spacing (about 3 mm) for the cranio-caudal axis. Deflection is a synthetic
 linear field, not a tissue model, and lesion masks come from MRI delineation, not histology.
 
 ## Data credit
