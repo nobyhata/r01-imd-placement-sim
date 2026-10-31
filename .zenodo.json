@@ -8,7 +8,7 @@
       "orcid": "0000-0002-6818-7700"
     }
   ],
-  "description": "Simulation code for the preliminary studies (P2) of an NIH R01 renewal on adaptive MRI-guided placement of implantable microdevices in prostate cancer. lesion_sim_3d.py is a 3D model on 220 expert-delineated PI-CAI lesions in which each implantable microdevice (IMD) is a 6.5 mm device along the needle path; anatomic_lesion_sim.py is a 2D anatomic model on PI-CAI lesion cross-sections; mc_adaptive_microdevice.py is a 2D didactic model.",
+  "description": "Simulation code for the preliminary studies (P2) of an NIH R01 renewal on adaptive MRI-guided placement of implantable microdevices in prostate cancer. lesion_sim_3d.py is a 3D model on 220 expert-delineated PI-CAI lesions in which each implantable microdevice (IMD) is a 6.5 mm device along the needle path; anatomic_lesion_sim.py is a 2D anatomic model on PI-CAI lesion cross-sections; mc_adaptive_microdevice.py is a 2D didactic model. Lesion masks are not included: fetch_picai_lesions.sh downloads them from the PI-CAI dataset (Saha A, Bosma JS, et al. Lancet Oncol 2024;25(7):879-887, doi:10.1016/S1470-2045(24)00220-1; https://github.com/DIAGNijmegen/picai_labels), which is licensed separately under CC BY-NC 4.0. The CC BY 4.0 license of this record covers the code only.",
   "notes": "Code development was assisted by Claude (Anthropic), an AI assistant.",
   "license": "CC-BY-4.0",
   "keywords": [
@@ -17,5 +17,16 @@
     "MRI-guided intervention",
     "needle placement",
     "adaptive planning"
+  ],
+  "references": [
+    "Saha A, Bosma JS, Twilt JJ, et al. Artificial intelligence and radiologists in prostate cancer detection on MRI (PI-CAI): an international, paired, non-inferiority, confirmatory study. Lancet Oncol. 2024;25(7):879-887. doi:10.1016/S1470-2045(24)00220-1"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.1016/S1470-2045(24)00220-1",
+      "relation": "references",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    }
   ]
 }
